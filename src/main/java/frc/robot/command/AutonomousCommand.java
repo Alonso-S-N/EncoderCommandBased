@@ -5,13 +5,15 @@
 package frc.robot.command;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.SubSystem.BracinSub;
 import frc.robot.SubSystem.Drive;
-import frc.robot.SubSystem.Encodin; 
+
 
 public class AutonomousCommand extends Command {
   private double vel;
@@ -22,7 +24,7 @@ public class AutonomousCommand extends Command {
 
   Timer SensorTime = new Timer();
 
-  private Encodin encodin;
+  Encoder encodin = new Encoder(0, 2, false, Encoder.EncodingType.k4X);
 
   private final double targetDistance = 1.0; 
   
@@ -30,12 +32,19 @@ public class AutonomousCommand extends Command {
 
   Timer recuoTimer = new Timer();
   private Drive driveSubsystem;
-  public AutonomousCommand(Drive driveSubsystem, BracinSub braceta,Encodin encodin) {
+  public AutonomousCommand(Drive driveSubsystem, BracinSub braceta) {
     this.driveSubsystem = driveSubsystem;
     this.braceta = braceta;
-    this.encodin = encodin;
 
-    addRequirements(driveSubsystem,braceta, encodin);
+
+    addRequirements(driveSubsystem,braceta);
+
+    // Configuração do encoder
+    double diametroRoda = 0.06; // 6 cm
+    double distancePerPulse = (Math.PI * diametroRoda) / 8192.0;
+    encodin.setMinRate(5);
+    encodin.setDistancePerPulse(distancePerPulse);
+    encodin.reset();
   }
 
   public void mexe() {
@@ -61,6 +70,7 @@ private void stopDrive() {
   @Override
   public void initialize() {
     timer.start();
+    encodin.reset();
   }
 
 
@@ -73,6 +83,9 @@ private void stopDrive() {
       finished = true;
   }
    SmartDashboard.putNumber("Encoder Distance", distance);
+   System.out.println("distance" + distance);
+   System.out.println("Pulsos" + encodin.getRaw());
+   SmartDashboard.putNumber("Encoder Raw", encodin.getRaw());
    
 }
   @Override

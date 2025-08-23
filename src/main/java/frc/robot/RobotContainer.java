@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.SubSystem.Drive;
-import frc.robot.SubSystem.Encodin;
 import frc.robot.SubSystem.BracinSub;
 import frc.robot.command.AutonomousCommand;
 import frc.robot.command.Loc;
@@ -29,13 +28,10 @@ public class RobotContainer {
   
   private final BracinSub baby = new BracinSub();
 
-  private final Encodin encodin = new Encodin();
 
 
 
   public RobotContainer() {
-
-    CommandScheduler.getInstance().registerSubsystem(encodin);
 
     Pdiddy = new PidCommand(baby,joyDeliciu);
 
@@ -44,7 +40,7 @@ public class RobotContainer {
     // Initialize Loc command with drive subsystem and joystick
     locCommand = new Loc(driveSubsystem,joyDeliciu);
 
-    auto = new AutonomousCommand(driveSubsystem,baby,encodin);
+    auto = new AutonomousCommand(driveSubsystem,baby);
 
     // Set default command
     driveSubsystem.setDefaultCommand(locCommand);
@@ -56,10 +52,6 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
       return auto;
   
-  }
-
-  public Encodin getEncodin() {
-    return encodin;
   }
 
   public Command getBracinCommand(){

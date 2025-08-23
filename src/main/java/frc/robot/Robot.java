@@ -31,26 +31,15 @@ public class Robot extends TimedRobot {
       // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
       // autonomous chooser on the dashboard
     }
-  
-  
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
      m_autonomousCommand = m_robotContainer.getAutonomousCommand();
      BracetaCommand = m_robotContainer.getBracinCommand();
 }
-  /**
-   * 
-   * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
-   * that you want ran during disabled, autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
-   * SmartDashboard integrated updating.
-   */
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    System.out.println("distancia" + m_robotContainer.getEncodin().getDistance());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
