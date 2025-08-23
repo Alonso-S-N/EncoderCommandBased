@@ -24,7 +24,7 @@ public class AutonomousCommand extends Command {
 
   Timer SensorTime = new Timer();
 
-  Encoder encodin = new Encoder(0, 2, false, Encoder.EncodingType.k4X);
+  Encoder encodin = new Encoder(1, 2, false, Encoder.EncodingType.k4X);
 
   private final double targetDistance = 1.0; 
   
@@ -41,7 +41,7 @@ public class AutonomousCommand extends Command {
 
     // Configuração do encoder
     double diametroRoda = 0.06; // 6 cm
-    double distancePerPulse = (Math.PI * diametroRoda) / 8192.0;
+    double distancePerPulse = (Math.PI * diametroRoda) / 2048;
     encodin.setMinRate(5);
     encodin.setDistancePerPulse(distancePerPulse);
     encodin.reset();
@@ -70,7 +70,6 @@ private void stopDrive() {
   @Override
   public void initialize() {
     timer.start();
-    encodin.reset();
   }
 
 
@@ -83,8 +82,11 @@ private void stopDrive() {
       finished = true;
   }
    SmartDashboard.putNumber("Encoder Distance", distance);
-   System.out.println("distance" + distance);
-   System.out.println("Pulsos" + encodin.getRaw());
+   System.out.println("distance " + distance);
+   System.out.println("Pulsos " + encodin.getRaw());
+   System.out.println("Ticks " + encodin.get());
+   System.out.println("distance Direta " + encodin.getDistance());
+   System.out.println("Pulsos Diretos " + encodin.getRaw());
    SmartDashboard.putNumber("Encoder Raw", encodin.getRaw());
    
 }
@@ -95,6 +97,9 @@ private void stopDrive() {
 
   @Override
   public boolean isFinished() {
+    if (timer.get() >= Constants.autonomousTime){
+      finished = true;
+    }
   SmartDashboard.putBoolean("Auto Finished", finished);
   return finished;
   }
