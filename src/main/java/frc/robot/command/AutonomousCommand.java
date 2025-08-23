@@ -24,9 +24,8 @@ public class AutonomousCommand extends Command {
 
   Timer SensorTime = new Timer();
 
-  Encoder encodin = new Encoder(1, 2, false, Encoder.EncodingType.k4X);
 
-  private final double targetDistance = 1.0; 
+  private final double targetDistance = 1.0;
   
   Timer timer = new Timer();
 
@@ -39,12 +38,7 @@ public class AutonomousCommand extends Command {
 
     addRequirements(driveSubsystem,braceta);
 
-    // Configuração do encoder
-    double diametroRoda = 0.06; // 6 cm
-    double distancePerPulse = (Math.PI * diametroRoda) / 2048;
-    encodin.setMinRate(5);
-    encodin.setDistancePerPulse(distancePerPulse);
-    encodin.reset();
+  
   }
 
   public void mexe() {
@@ -70,25 +64,18 @@ private void stopDrive() {
   @Override
   public void initialize() {
     timer.start();
+    driveSubsystem.reqDrive();
   }
 
 
   public void execute() {
-    double distance = encodin.getDistance();
+    double distance = driveSubsystem.encodin.getDistance();
     if (distance < targetDistance){
       mexe();
     } else { 
       stopDrive();
       finished = true;
   }
-   SmartDashboard.putNumber("Encoder Distance", distance);
-   System.out.println("distance " + distance);
-   System.out.println("Pulsos " + encodin.getRaw());
-   System.out.println("Ticks " + encodin.get());
-   System.out.println("distance Direta " + encodin.getDistance());
-   System.out.println("Pulsos Diretos " + encodin.getRaw());
-   SmartDashboard.putNumber("Encoder Raw", encodin.getRaw());
-   
 }
   @Override
   public void end(boolean interrupted) {
