@@ -15,7 +15,8 @@ public class BracinSub extends SubsystemBase {
   //private static final double gearRatio = 1;
   //private static final double degreesPerMotorRev = 360.0 / gearRatio;
 
-  private final SparkMax armMotor = new SparkMax(Constants.m_Bracin, MotorType.kBrushless);
+  public final SparkMax armMotor = new SparkMax(Constants.m_Bracin, MotorType.kBrushless);
+  public final SparkMax intakeMotor = new SparkMax(Constants.m_Intake, MotorType.kBrushless);
   //private final SparkClosedLoopController pidController = armMotor.getClosedLoopController();
 
   public BracinSub() {
@@ -45,6 +46,16 @@ public class BracinSub extends SubsystemBase {
 
   public void StopBraceta(){
     armMotor.set(0.0);
+  }
+  
+  public void Cuspir(){
+    intakeMotor.set(0.7);
+  }
+  public void Pegar(){
+    intakeMotor.set(-0.7);
+  }
+  public void stopIntake(){
+    intakeMotor.set(0.0);
   }
 
   @Override

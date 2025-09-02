@@ -30,4 +30,5 @@ public final class Constants {
   public static double autonomousLocNeg = -0.25;
   public static double LocTimeUltra = 4;
   public static double autonomousBraceta = 3.0;
+  public static int m_Intake = 6;
 }

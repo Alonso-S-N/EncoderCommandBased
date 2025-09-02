@@ -32,9 +32,9 @@ public class PidCommand extends Command {
   }
 
   public void mexerBracinSlk(){
-  if (joyDeliciu.getRawButton(Constants.RB)){
+  if (joyDeliciu.getRawAxis(Constants.RT) > 0.1){
     braceta.MexePruLado();
-  } else if (joyDeliciu.getRawButton(Constants.LB)){
+  } else if (joyDeliciu.getRawAxis(Constants.LT) > 0.1){
     braceta.MexePruOutro();
   } else {
     braceta.StopBraceta();
@@ -45,13 +45,29 @@ public class PidCommand extends Command {
      // braceta.MexePru(ANgulinQnoisQuer2);
     //}  
   }
+
+  public void mexerIntakeSlk(){
+    if (joyDeliciu.getRawButton(Constants.RB)){
+      braceta.Pegar();
+    } else if (joyDeliciu.getRawButton(Constants.LB)){
+      braceta.Cuspir();
+    } else {
+      braceta.stopIntake();
+    }
+  }
   
   @Override
   public void execute() {
     joyDeliciu.getRawButton(Constants.RB);
     joyDeliciu.getRawButton(Constants.LB);
+    joyDeliciu.getRawAxis(Constants.RT);
+    joyDeliciu.getRawAxis(Constants.LT);
     
    mexerBracinSlk();
+   mexerIntakeSlk();
+
+   SmartDashboard.putNumber("velocidade Braceta", braceta.armMotor.getAppliedOutput());
+   SmartDashboard.putNumber("velocidade Intake", braceta.intakeMotor.getAppliedOutput());
   }
 
 

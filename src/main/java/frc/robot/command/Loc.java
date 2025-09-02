@@ -63,14 +63,9 @@ public class Loc extends Command {
     double Y = joyDeliciu.getY();
     double X1 = joyDeliciu.getRawAxis(Constants.X1);
     double Y2 = joyDeliciu.getRawAxis(Constants.Y2);
-    double RT = joyDeliciu.getRawAxis(Constants.RT);
-    double LT = joyDeliciu.getRawAxis(Constants.LT);
 
     if (joyDeliciu.getPOV() != Constants.povDeadZone){
       speeds = Calcs.calculatePovDrive(joyDeliciu, B_Speed);
-    }
-    else if (RT > Constants.deadZone || LT > Constants.deadZone) {
-      speeds = Calcs.calculateTriggerDrive(joyDeliciu, B_Speed);
     }
     else if (Math.abs(X) >= Constants.deadZone || Math.abs(Y) >= Constants.deadZone || Math.abs(X) < Constants.NegativeDeadZone || Math.abs(Y) < Constants.NegativeDeadZone) {
       speeds = Calcs.calculateAnalogDrive(joyDeliciu, B_Speed); 

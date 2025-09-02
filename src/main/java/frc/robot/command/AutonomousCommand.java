@@ -69,13 +69,18 @@ private void stopDrive() {
 
 
   public void execute() {
-    double distance = driveSubsystem.encodin.getDistance();
+    double distance = driveSubsystem.getDistance();
     if (distance < targetDistance){
       mexe();
     } else { 
       stopDrive();
       finished = true;
   }
+
+  SmartDashboard.putNumber("distancia encoder: ", distance);
+  SmartDashboard.putNumber("timer", timer.get());
+  SmartDashboard.putNumber("speed", vel);
+  SmartDashboard.putBoolean("Auto Finished", finished);
 }
   @Override
   public void end(boolean interrupted) {
