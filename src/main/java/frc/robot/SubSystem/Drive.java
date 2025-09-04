@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Drive extends SubsystemBase {
 
-  private final Encoder encodin = new Encoder(0,1, false, Encoder.EncodingType.k4X);
+  private final Encoder encodin = new Encoder(0,1, false, Encoder.EncodingType.k1X);
   // Motores
   public final VictorSPX m_leftDrive  = new VictorSPX(Constants.LMot);
   public final VictorSPX m_rightDrive = new VictorSPX(Constants.RMot);
@@ -25,7 +25,6 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    getDistance();
     System.out.println("Distance: " + encodin.getDistance() + " m");
     System.out.println("Pulsos: " + encodin.getRaw());
   }
@@ -50,9 +49,7 @@ public class Drive extends SubsystemBase {
     m_rightDrive2.setNeutralMode(NeutralMode.Brake);
 
      // Configura encoder
-     //double distancePerPulse = (Math.PI * diametroRoda) / 8192.0;
-     double distancePerPulse = 1.0; // Ajuste conforme a resolução do encoder
+     double distancePerPulse = (Math.PI * diametroRoda) / 2048;
      encodin.setDistancePerPulse(distancePerPulse);
-     encodin.reset();
   }
 }
