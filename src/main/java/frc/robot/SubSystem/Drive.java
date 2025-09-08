@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Drive extends SubsystemBase {
 
-  private final Encoder encodin = new Encoder(0,1, false, Encoder.EncodingType.k1X);
+  private final Encoder encodin = new Encoder(0,1, false, Encoder.EncodingType.k4X);
   // Motores
   public final VictorSPX m_leftDrive  = new VictorSPX(Constants.LMot);
   public final VictorSPX m_rightDrive = new VictorSPX(Constants.RMot);

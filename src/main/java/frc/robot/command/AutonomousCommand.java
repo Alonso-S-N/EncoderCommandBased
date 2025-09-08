@@ -14,7 +14,7 @@ import frc.robot.SubSystem.Drive;
 public class AutonomousCommand extends Command {
   private double vel;
 
-  private boolean finished,recuando = false;
+  private boolean finished,recuando = false;  
 
   BracinSub braceta;
 
@@ -22,6 +22,7 @@ public class AutonomousCommand extends Command {
 
 
   private final double targetDistance = 1.0;
+
   
   Timer timer = new Timer();
 
@@ -35,21 +36,21 @@ public class AutonomousCommand extends Command {
     addRequirements(driveSubsystem,braceta);
   }
 
-  public void mexe() {
-    vel = Constants.autonomousLoc;
-
+  public void setSpeedAuto(){
     driveSubsystem.m_leftDrive.set(ControlMode.PercentOutput, vel);
     driveSubsystem.m_leftDrive2.set(ControlMode.PercentOutput, vel);
     driveSubsystem.m_rightDrive.set(ControlMode.PercentOutput, vel);
     driveSubsystem.m_rightDrive2.set(ControlMode.PercentOutput, vel);
+  }
+
+  public void mexe() {
+    vel = Constants.autonomousLoc;
+    setSpeedAuto();
 } 
 
 private void stopDrive() {
     vel = 0;
-    driveSubsystem.m_leftDrive.set(ControlMode.PercentOutput, 0);
-    driveSubsystem.m_leftDrive2.set(ControlMode.PercentOutput, 0);
-    driveSubsystem.m_rightDrive.set(ControlMode.PercentOutput, 0);
-    driveSubsystem.m_rightDrive2.set(ControlMode.PercentOutput, 0);
+    setSpeedAuto();
 
     System.out.println("STOP DRIVE CALLED!");
 }
