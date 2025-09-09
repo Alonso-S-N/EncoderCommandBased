@@ -30,10 +30,10 @@ public class Calcs {
         double LS = 0, Rs = 0;
       
 
-        if (X > 0 && Y > 0) {
+        if (X >= 0 && Y >= 0) {
             LS = magnitude * B_Speed;
             Rs = (2 * seno - 1) * magnitude * B_Speed;
-        } else if (X < 0 && Y > 0) {
+        } else if (X < 0 && Y >= 0) {
             LS = (2 * seno - 1) * magnitude * B_Speed;
             Rs = magnitude * B_Speed;
         } else if (X >= 0 && Y < 0) {
@@ -58,12 +58,12 @@ public class Calcs {
 
         double rapidao = 0, rapidao2 = 0;
         //quadrante 1
-      if (X1 > 0 && Y2 > 0) {
+      if (X1 >= 0 && Y2 >= 0) {
         rapidao = magnitude2 * B_Speed;
         rapidao2 = (2 * seno2 -1) * magnitude2 * B_Speed;	
        } 
       //quadrante 2
-      else if (X1 < 0 && Y2 > 0) {  
+      else if (X1 < 0 && Y2 >= 0) {  
         rapidao = (2 * seno2 - 1) * magnitude2 * B_Speed;
         rapidao2 = magnitude2 * B_Speed;
        } 

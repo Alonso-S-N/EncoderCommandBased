@@ -14,7 +14,7 @@ import frc.robot.SubSystem.Drive;
 public class AutonomousCommand extends Command {
   private double vel;
 
-  private boolean finished,recuando = false;  
+  private boolean finished,recuando = false;
 
   BracinSub braceta;
 

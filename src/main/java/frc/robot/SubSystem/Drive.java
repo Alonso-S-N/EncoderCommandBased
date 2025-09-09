@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -25,8 +26,7 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println("Distance: " + encodin.getDistance() + " m");
-    System.out.println("Pulsos: " + encodin.getRaw());
+   Smart();
   }
 
   public double getDistance() {
@@ -51,5 +51,11 @@ public class Drive extends SubsystemBase {
      // Configura encoder
      double distancePerPulse = (Math.PI * diametroRoda) / 2048;
      encodin.setDistancePerPulse(distancePerPulse);
+     encodin.setReverseDirection(true);
+  }
+
+  public void Smart(){
+    SmartDashboard.putNumber("Encoder Distance", getDistance());
+    SmartDashboard.putNumber("Encoder Pulses", encodin.getRaw());
   }
 }
